@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
 
     channels = [v0, v1, v2, v3]
-    #channels = [v0, v1, v2]
+
 
 
     '''
@@ -134,7 +134,6 @@ if __name__ == "__main__":
     #Channel A
     '''
 
-    # Plotting routine for Danny_dont_vito
     SMALL_SIZE = 10
     MEDIUM_SIZE = 14
     BIGGER_SIZE = 18
@@ -171,9 +170,6 @@ if __name__ == "__main__":
     '''
 
 
-
-    # Plotting routine for Danny_dont_vito
-
     fig, ax1 = pl.subplots()
     color1 = 'black'
     color2 = 'blue'
@@ -204,7 +200,7 @@ if __name__ == "__main__":
     #Channel C
     '''
 
-    # Plotting routine for Danny_dont_vito
+    
 
     fig, ax1 = pl.subplots()
     color1 = 'black'
@@ -220,7 +216,7 @@ if __name__ == "__main__":
     ax1.tick_params(axis='x', labelsize=MEDIUM_SIZE)
     ax1.grid()
 
-    plot1 = ax1.scatter(stress, C_lads+1 , color=color1, linewidth=width) #plot silh
+    plot1 = ax1.scatter(stress, C_lads+1 , color=color1, linewidth=width) 
     pl.title('Channel C', fontsize=BIGGER_SIZE)
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
     pl.savefig('Channel_C_mask.png')
@@ -237,9 +233,6 @@ if __name__ == "__main__":
     '''
 
 
-
-    # Plotting routine for Danny_dont_vito
-
     fig, ax1 = pl.subplots()
     color1 = 'black'
     color2 = 'blue'
@@ -253,7 +246,7 @@ if __name__ == "__main__":
     ax1.tick_params(axis='x', labelsize=MEDIUM_SIZE)
     ax1.grid()
 
-    plot1 = ax1.scatter(stress, D_lads+1 , color=color1, linewidth=width) #plot silh
+    plot1 = ax1.scatter(stress, D_lads+1 , color=color1, linewidth=width) 
     pl.title('Channel D', fontsize=BIGGER_SIZE)
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
     pl.savefig('channel_D_mask.png')
@@ -287,40 +280,3 @@ if __name__ == "__main__":
     print('A/D matching rate: ' , get_match_rate(A_lads, D_lads))
     print('B/C matching rate: ' , get_match_rate(B_lads, C_lads))
 
-
-
-    # NOTE: get error as function of damage parameter
-'''
-    match_rate = []
-    for i in range(len(D_lads)-1):
-        match_rate.append(ari(D_lads[0:i+1], C_lads[0:i+1]))
-'''
-
-'''
-    # Plotting routine for Danny_dont_vito
-    SMALL_SIZE = 10
-    MEDIUM_SIZE = 14
-    BIGGER_SIZE = 18
-    width = 2.0
-
-    fig, ax1 = pl.subplots()
-    color1 = 'black'
-    color2 = 'blue'
-    color3 = 'red'
-
-    ax1.set_ylabel('Adjusted Rand Index', fontsize=MEDIUM_SIZE)
-    #ax1.tick_params(axis='y', labelcolor=color1, labelsize = MEDIUM_SIZE)
-    #ax1.yaxis.set_major_locator(ticker.MultipleLocator(1))
-
-    ax1.set_xlabel('Event Number', fontsize=MEDIUM_SIZE)
-    ax1.tick_params(axis='x', labelsize=MEDIUM_SIZE)
-    ax1.tick_params(axis='y', labelsize=MEDIUM_SIZE)
-    #ax1.grid()
-
-    plot1 = ax1.plot(match_rate, linewidth=width)
-
-
-    pl.title(fname_raw, fontsize=BIGGER_SIZE)
-    fig.tight_layout()  # otherwise the right y-label is slightly clipped
-    pl.show()
-'''
