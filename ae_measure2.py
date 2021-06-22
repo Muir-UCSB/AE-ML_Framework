@@ -151,22 +151,6 @@ def min_sig(signal1, signal2):
 
 
 
-def find_dt(sig1,sig2,thresh=1.2):
-    '''
-    Finds ToA difference. Need to update to use AIC method
-
-    signal1: signal from channel 1, single event (array-like)
-    signal2: signal from channel 2, single event (array-like)
-
-    returns:
-    sig: maximum between the two signals (array-like)
-    '''
-
-    at1 = get_first_peak(sig1,thresh=thresh)*0.1
-    at2 = get_first_peak(sig2,thresh=thresh)*0.1
-    dt = at2 - at1
-    return dt
-
 
 
 
@@ -174,14 +158,14 @@ def fft(dt, y, low_pass=None, high_pass=None):
     '''
     Performs FFT
 
-    dt: FFT frequency array (array-like)
-    y: FFT intensity (array-like)
-    low_pass: Optional variable for a low band pass filter in the same units of w (float)
-    high_pass: Optional variable for a high band pass filter in the same units of w (float)
+    dt (float): Sampling rate
+    y (array-like): Voltage time-series
+    low_pass (float): Optional variable for a low band pass filter in the same units of w
+    high_pass (float): Optional variable for a high band pass filter in the same units of w
 
     returns:
-    w: FFT frequency array (array-like)
-    z: FFT intensity (array-like)
+    w (array-like): Frequency
+    z (array-liike): Power
     '''
     z = np.abs(np.fft.fft(y))
     w = np.fft.fftfreq(len(z), dt)
@@ -201,8 +185,8 @@ def get_freq_centroid(w, z, low_pass=None, high_pass=None):
     '''
     Gets frequency centroid of an fft
 
-    w: FFT frequency array (array-like)
-    z: FFT intensity (array-like)
+    w (array-like): Frequency list
+    z (array-like): Power list
     low_pass: Optional variable for a low band pass filter in the same units of w (float)
     high_pass: Optional variable for a high band pass filter in the same units of w (float)
 
@@ -215,7 +199,29 @@ def get_freq_centroid(w, z, low_pass=None, high_pass=None):
     if high_pass is not None:
         z = z[np.where(w < high_pass)]
         w = w[np.where(w < high_pass)]
-    return np.sum(z*w)/np.sum(z)
+    return np.sum(z*w)/np.sum(w)
+
+def get_average_freq(w, z, low_pass=None, high_pass=None):
+    '''
+    Gets average frequency
+
+    w (array-like): Frequency list
+    z (array-like): Power list
+    low_pass (float): Optional variable for a low band pass filter in the same units of w (float)
+    high_pass (float): Optional variable for a high band pass filter in the same units of w (float)
+
+    returns:
+    centroid: Frequency centroid (float)
+    '''
+    if low_pass is not None:
+        z = z[np.where(w > low_pass)]
+        w = w[np.where(w > low_pass)]
+    if high_pass is not None:
+        z = z[np.where(w < high_pass)]
+        w = w[np.where(w < high_pass)]
+    return np.sum(z)/np.sum(w)
+
+
 
 
 import scipy
