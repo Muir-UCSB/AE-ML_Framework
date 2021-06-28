@@ -199,10 +199,11 @@ def get_freq_centroid(w, z, low_pass=None, high_pass=None):
     if high_pass is not None:
         z = z[np.where(w < high_pass)]
         w = w[np.where(w < high_pass)]
-    return np.sum(z*w)/np.sum(w)
+    return np.sum(z*w)/np.sum(z)
 
 def get_average_freq(w, z, low_pass=None, high_pass=None):
     '''
+    Not functioning
     Gets average frequency
 
     w (array-like): Frequency list
