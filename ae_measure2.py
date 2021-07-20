@@ -181,46 +181,19 @@ def fft(dt, y, low_pass=None, high_pass=None):
 
     return w, z
 
-def get_freq_centroid(w, z, low_pass=None, high_pass=None):
+def get_freq_centroid(w, z):
     '''
     Gets frequency centroid of an fft
 
     w (array-like): Frequency list
     z (array-like): Power list
-    low_pass: Optional variable for a low band pass filter in the same units of w (float)
-    high_pass: Optional variable for a high band pass filter in the same units of w (float)
 
     returns:
-    centroid: Frequency centroid (float)
+    centroid (float): Frequency centroid
     '''
-    if low_pass is not None:
-        z = z[np.where(w > low_pass)]
-        w = w[np.where(w > low_pass)]
-    if high_pass is not None:
-        z = z[np.where(w < high_pass)]
-        w = w[np.where(w < high_pass)]
     return np.sum(z*w)/np.sum(z)
 
-def get_average_freq(w, z, low_pass=None, high_pass=None):
-    '''
-    Not functioning
-    Gets average frequency
 
-    w (array-like): Frequency list
-    z (array-like): Power list
-    low_pass (float): Optional variable for a low band pass filter in the same units of w (float)
-    high_pass (float): Optional variable for a high band pass filter in the same units of w (float)
-
-    returns:
-    centroid: Frequency centroid (float)
-    '''
-    if low_pass is not None:
-        z = z[np.where(w > low_pass)]
-        w = w[np.where(w > low_pass)]
-    if high_pass is not None:
-        z = z[np.where(w < high_pass)]
-        w = w[np.where(w < high_pass)]
-    return np.sum(z)/np.sum(w)
 
 
 
