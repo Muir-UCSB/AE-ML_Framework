@@ -8,7 +8,7 @@ waveforms to feature vectors, and clusters the feature vectors. The output is a 
 
 In each experiment, Channel A/B/C/D corresponds to sensor S9225a, S9225-b, B1025-a, B1025-b respectively.
 
-
+Raw waveforms and filters are included here. If there are questions as to how to import them, please contact me!
 
 
 
