@@ -13,9 +13,58 @@ import matplotlib.pyplot as plt
 import pandas
 from scipy.stats import linregress
 from scipy.integrate import simps
+import json
+import pandas as pd
 
 nan = float('nan')
 inf = float('inf')
+
+def load_PLB(path=None):
+    '''
+    :param path: (str) path name the PLB_data.json file is located at.
+    :return data: Dictionary-like with the following attributes:
+                data : {ndarray} of shape (N, 1024)
+                target : {ndarray} of shape (N, )
+                target_angle : The angle corresponding to the target
+    '''
+    if path is None:
+        raise ValueError('Please input path name')
+
+    with open(path) as json_file:
+        PLB = json.load(json_file)
+
+    for key in PLB.keys():
+        PLB[key]  = np.array(PLB[key])
+    return PLB
+
+
+
+
+
+
+def read_mistras(fname):
+    '''
+    fname (str): file path of .csv file in Mistras (i.e. Khalid's) format
+
+    returns:
+    (wave, event_num, time): wave is the waveform, event_num is the number of the event
+        indexed from 1, and time is the time in the experiment the event occured
+
+    '''
+    metadata = pd.read_csv(fname, nrows=10)
+    # gets netadata of wave
+    event_num = int(metadata.index[-2][0][11:])
+    time = float(metadata.index[-1][0][14:])
+    sig_len = int(metadata.index[6][0][36:])
+
+    #gets wave
+    wave = pd.read_csv(fname, skiprows=10).to_numpy()
+    wave = np.reshape(wave, sig_len)
+
+    return wave, event_num, time
+
+
+
 
 def read_ae_file2(fname, channel_num, sig_length=1024):
     '''
