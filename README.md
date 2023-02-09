@@ -1,5 +1,5 @@
 # AE-ML_Framework
-Code for unsupervised learning of AE signals of SiC/SiC miniocomposites
+Code for unsupervised learning of AE signals of SiC/SiC minicomposites
 
 ae_measure2.py file contains sub-routines for reading in AE data generated from WaveExplorer software and conversion of waves to feature vectors.
 
